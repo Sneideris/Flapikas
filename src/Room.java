@@ -21,7 +21,6 @@ public class Room {
 	public void update() {
 		currentTime++;
 		if(currentTime == time) {
-			//kuriam staciakampi
 			currentTime = 0;
 			int width = 20;
 			int height1 = random.nextInt(Flappy.HEIGHT/2);
@@ -35,15 +34,10 @@ public class Room {
 			rect.x -= speed;
 			if(rect.x+rect.width <= 0) {
 				tubes.remove(i--);
+				Flappy.score+=0.5;
 				continue;
 			}
 		}
 	}
-	public void render(Graphics g) {
-		g.setColor(Color.blue);
-		for(int i = 0; i < tubes.size(); i++) {
-			Rectangle rect = tubes.get(i);
-			g.fillRect(rect.x, rect.y, rect.width, rect.height);
-		}
-	}
+
 }

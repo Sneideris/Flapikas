@@ -11,17 +11,18 @@ import javax.swing.JFrame;
 public class Flappy extends Canvas implements Runnable,KeyListener {
 	private static final long serialVersionUID = 1L;
 	public static final int WIDTH = 640, HEIGHT = 480;
-	public boolean running = false;
+	private boolean running = false;
 	private Thread thread;
-	public Room room;
+	public static Room room;
 	public Bird bird;
+	public static double score = 0;
 	
 	public Flappy() {
 		Dimension d = new Dimension(Flappy.WIDTH,Flappy.HEIGHT);
 		setPreferredSize(d);
 		addKeyListener(this);
 		room = new Room(80);
-		bird = new Bird(20,Flappy.HEIGHT/2,room.tubes);
+		bird = new Bird(20,Flappy.HEIGHT/2,room.data.tubes);
 	}
 	public synchronized void start() {
 		if(running) return;
@@ -49,14 +50,11 @@ public class Flappy extends Canvas implements Runnable,KeyListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		
 		flappy.start();
 	}
 
 	@Override
 	public void run() {
-		int fps = 0;
-		double timer = System.currentTimeMillis();
 		long lastTime = System.nanoTime();
 		double ns = 1000000000 / 60;
 		double delta = 0;
@@ -67,13 +65,7 @@ public class Flappy extends Canvas implements Runnable,KeyListener {
 			while(delta >= 1) {
 				update();
 				render();
-				fps++;
 				delta--;
-			}
-			if(System.currentTimeMillis() - timer >=1000) {
-				System.out.println("FPS:" + fps);
-				fps=0;
-				timer+=1000;
 			}
 		}
 		stop();
@@ -95,6 +87,8 @@ public class Flappy extends Canvas implements Runnable,KeyListener {
 		g.fillRect(0, 0, Flappy.WIDTH, Flappy.HEIGHT);
 		room.render(g);
 		bird.render(g);
+		g.setColor(Color.white);
+		g.drawString("Score: "+ (int)score, 10, 20);
 		g.dispose();
 		bs.show();
 		}

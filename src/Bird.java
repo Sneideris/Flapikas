@@ -9,10 +9,7 @@ public class Bird extends Rectangle{
 	public boolean isPressed = false;
 	private ArrayList<Rectangle> tubes;
 	
-public Bird(int x, int y,ArrayList<Rectangle> tubes) {
-		setBounds(x,y,32,32);
-		this.tubes = tubes;
-	}
+
 	public void update() {
 		if(isPressed) {
 			y -= speed;
@@ -20,11 +17,19 @@ public Bird(int x, int y,ArrayList<Rectangle> tubes) {
 			y+=speed;
 		}
 		for(int i = 0;i < tubes.size();i++) {
-			if(this.intersects(tubes.get(i))) System.exit(1);
+			if(this.intersects(tubes.get(i))) {
+				Flappy.room = new Room(80);
+				Flappy.score = 0;
+				tubes = Flappy.room.data.tubes;
+				y = Flappy.HEIGHT/2;
+			}
+		}
+		if (y >= Flappy.HEIGHT) {
+			Flappy.room = new Room(80);
+			tubes = Flappy.room.data.tubes;
+			Flappy.score = 0;
+			y = Flappy.HEIGHT/2;
 		}
 	}
-	public void render(Graphics g) {
-		g.setColor(Color.green);
-		g.fillOval(x, y, width, height);
-	}
+
 }
