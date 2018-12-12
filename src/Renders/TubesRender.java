@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class TubesRender {
-	public void render(Graphics g) {
+public class TubesRender extends Room {
+	public static void render(Graphics g) {
 		g.setColor(Color.red);
 		for(int i = 0; i < tubes.size(); i++) {
 			Rectangle rect = tubes.get(i);

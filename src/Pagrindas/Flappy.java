@@ -1,3 +1,4 @@
+package Pagrindas;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,6 +9,9 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import Renders.BirdRender;
+import Renders.TubesRender;
+
 public class Flappy extends Canvas implements Runnable,KeyListener {
 	private static final long serialVersionUID = 1L;
 	public static final int WIDTH = 640, HEIGHT = 480;
@@ -15,14 +19,13 @@ public class Flappy extends Canvas implements Runnable,KeyListener {
 	private Thread thread;
 	public static Room room;
 	public Bird bird;
-	public static double score = 0;
 	
 	public Flappy() {
 		Dimension d = new Dimension(Flappy.WIDTH,Flappy.HEIGHT);
 		setPreferredSize(d);
 		addKeyListener(this);
 		room = new Room(80);
-		bird = new Bird(20,Flappy.HEIGHT/2,room.data.tubes);
+		bird = new Bird(20,Flappy.HEIGHT/2,room.tubes);
 	}
 	public synchronized void start() {
 		if(running) return;
@@ -76,22 +79,6 @@ public class Flappy extends Canvas implements Runnable,KeyListener {
 		bird.update();
 	}
 
-	private void render() {
-		BufferStrategy bs = getBufferStrategy();
-		if(bs == null) {
-			createBufferStrategy(3);
-			return;
-		}
-		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.black);
-		g.fillRect(0, 0, Flappy.WIDTH, Flappy.HEIGHT);
-		room.render(g);
-		bird.render(g);
-		g.setColor(Color.white);
-		g.drawString("Score: "+ (int)score, 10, 20);
-		g.dispose();
-		bs.show();
-		}
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
