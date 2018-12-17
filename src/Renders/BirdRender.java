@@ -5,20 +5,17 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-public class BirdRender {
-	Room room;
+import Pagrindas.Room;
 
-	public BirdRender(Room room) {
-	this.room = room;
-	}
-	public Bird(int x, int y,ArrayList<Rectangle> tubes) {
-		setBounds(x,y,32,32);
-		this.tubes = tubes;
-	}
+public class BirdRender {
+
 	public static void render(Graphics g) {
 		int width = 20;
-		int height = room.height1;
+		Room room = new Room(80);
+		int height =room.getHeight1();
 		g.setColor(Color.green);
 		g.fillOval(x, y, width, height);
 	}
+
+	
 }

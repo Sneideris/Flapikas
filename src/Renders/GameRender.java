@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import Pagrindas.Flappy;
+
 public class GameRender {
-	private static double score = 0;
-	private void render() {
+	public static double score = 0;
+	public static void render() {
 		
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null) {
