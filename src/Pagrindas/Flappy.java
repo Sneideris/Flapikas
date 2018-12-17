@@ -10,7 +10,6 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 import Renders.BirdRender;
-import Renders.GameRender;
 import Renders.TubesRender;
 
 public class Flappy extends Canvas implements Runnable,KeyListener {
@@ -68,7 +67,7 @@ public class Flappy extends Canvas implements Runnable,KeyListener {
 			lastTime = now;
 			while(delta >= 1) {
 				update();
-				GameRender.render();
+				render();
 				delta--;
 			}
 		}

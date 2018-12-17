@@ -5,13 +5,12 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Renders.GameRender;
-
 public class Room {
-	public static ArrayList<Rectangle> tubes;
+	public ArrayList<Rectangle> tubes;
 	private int time;
 	private int currentTime = 0;
 	private int speed = 5;
+	public int height1 = 0;
 	private Random random;
 	private final int SPACE_TUBES = 96;
 	private final int WIDTH_TUBES = 32;
@@ -20,19 +19,14 @@ public class Room {
 		this.time = time;
 		random = new Random();
 	}
-int height1=0;
+	
+	public int getHeight1() {
+		return height1;
+	}
 
-public int getHeight1() {
-	return height1;
-}
-
-	public static ArrayList<Rectangle> getTubes() {
-	return tubes;
-}
-
-public static void setTubes(ArrayList<Rectangle> tubes) {
-	Room.tubes = tubes;
-}
+	public void setHeight1(int height1) {
+		this.height1 = height1;
+	}
 
 	public void update() {
 		currentTime++;
@@ -50,7 +44,7 @@ public static void setTubes(ArrayList<Rectangle> tubes) {
 			rect.x -= speed;
 			if(rect.x+rect.width <= 0) {
 				tubes.remove(i--);
-				GameRender.score+=0.5;
+				Flappy.score+=0.5;
 				continue;
 			}
 		}
